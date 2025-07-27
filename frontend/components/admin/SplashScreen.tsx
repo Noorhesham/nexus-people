@@ -1,0 +1,258 @@
+import React, { useContext, useState } from 'react';
+import { Formik, Field, Form } from 'formik';
+import * as Yup from 'yup';
+import { motion } from 'framer-motion';
+import { Button, IconButton, InputAdornment, InputLabel, TextField } from '@mui/material';
+import { VisibilityOff, Visibility } from '@mui/icons-material';
+import { FormattedMessage, useIntl } from 'react-intl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Typography from '@mui/material/Typography';
+import { LanguageDirectionContext } from '@/helpers/langDirection';
+import { AuthContext } from '@/helpers/AuthContext';
+
+const SplashVariants = {
+  hidden: {
+    width: '100vw'
+  },
+  visible: {
+    width: '50vw',
+    transition: {
+      delay: 3,
+      duration: 2,
+      ease: 'easeInOut'
+    }
+  }
+}
+
+const LoginVariants = {
+  hidden: {
+    width: '0vw',
+    x: '100vw',
+  },
+  visible: {
+    width: '50vw',
+    x: 0,
+    transition: {
+      delay: 3,
+      duration: 2,
+      ease: 'easeInOut'
+    }
+  }
+}
+
+const formVariants = {
+  hidden: {
+   opacity: 0
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 5,
+      duration: 1,
+      ease: 'easeInOut'
+    }
+  }
+}
+
+const SplashScreen: React.FC = () => {
+  const {login, errorMessage} = useContext(AuthContext);
+  const { isRTL } = useContext(LanguageDirectionContext);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const {formatMessage} = useIntl();
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
+
+  const ValidationSchema = Yup.object({
+    email: Yup.string()
+      .email(formatMessage({ id: 'contact.email.invalid' }))
+      .required(formatMessage({ id: 'contact.email.error' })),
+
+    password: Yup.string()
+      .min(5, 'Password must be at least 5 characters')
+      .required('Password is required'),  
+  })
+
+  const initialValues = {
+    email: '',
+    password: '',
+  }
+
+  const handleSubmit = async (values:any, {resetForm}:any) => {
+    try {
+      ValidationSchema.validate(values).then(async () => {
+        login(values.email, values.password, 'admin')
+      }).then(async () => {
+        // fetchAdmin(Cookies.get('token') as string)
+      })
+    } catch (error) {
+        
+    }
+  }
+
+  return (
+    <div className="flex overflow-hidden h-screen w-screen">
+      <motion.div className={`bg-white flex items-center justify-center`}
+        variants={SplashVariants}
+        initial='hidden'
+        animate='visible'
+      >
+
+        <svg 
+          version="1.1" 
+          className='w-96 h-screen' 
+          id="Layer_1" 
+          xmlns="http://www.w3.org/2000/svg" 
+          xmlnsXlink="http://www.w3.org/1999/xlink" 
+          x="0px" 
+          y="0px"
+          viewBox="0 0 1280 478.96" 
+          style={{enableBackground:"new 0 0 1280 478.96"} as React.CSSProperties} 
+          xmlSpace="preserve"
+        >
+          <style type="text/css">
+            {`
+            .st0{fill:#C60000;}
+            .st1{fill:#FFFFFF;}
+            .st2{fill:#575757;}
+            .st3{fill:#06204F;}
+          `}
+          </style>
+          <g className=''>
+            <path className="st3" d="M114.27,105.85H52.89v267.26h65.19V211.89L235.5,372.86V267.71L114.27,105.85z"/>
+            <path className="st3" d="M287.68,105.85v55.08h69.76v-0.18h141.04v-54.91H287.68z M287.63,215.39v47.46h60.67v-0.04H459v-47.41H287.63z
+              M287.68,318.2v54.91h210.8V318.2H287.68z"/>
+            <polygon className="st0" points="721.7,237.51 814.38,373.11 738.61,373.11 682.44,293.22 626.14,373.11 550.66,373.11 642.99,237.13 
+              550.66,105.85 631.73,105.85 682.1,179.55 732.13,105.85 814.48,105.85 	"/>
+          <g className='animate-bounce'>
+          <circle className="st3 " cx="1045.92" cy="239.48" r="181.19"/>
+            <g>
+              <g>
+                <path className="st1" d="M1124.98,246.51l9.15,5.29c8.2,4.73,15.07,10.89,20.5,17.99c5.64,7.37,9.73,15.75,12.09,24.59
+                  c2.36,8.81,3.02,18.11,1.82,27.34c-1.16,8.86-4.03,17.63-8.76,25.82c-4.73,8.2-10.89,15.08-17.99,20.51
+                  c-7.37,5.65-15.76,9.71-24.59,12.1c-8.83,2.36-18.13,3.01-27.34,1.8c-8.86-1.15-17.64-4.03-25.84-8.76h0.01l-56.05-32.35
+                  c8.3-1.77,15.2-3.49,23.08-7.07c5.18-2.34,10.15-5.14,14.84-8.38l1.44-1l1.52,0.87l32.13,18.55h0.01
+                  c4.21,2.44,8.74,3.91,13.28,4.5c4.75,0.62,9.56,0.28,14.14-0.95c4.57-1.23,8.9-3.34,12.71-6.24c3.65-2.78,6.84-6.32,9.26-10.54
+                  h0.01c2.43-4.21,3.91-8.74,4.5-13.28c0.62-4.75,0.27-9.56-0.96-14.16c-1.22-4.57-3.33-8.89-6.23-12.69
+                  c-2.8-3.65-6.33-6.83-10.55-9.28l-30.44-17.57l-1.61-0.93l0.24-1.82c0.04-0.31,0.09-0.77,0.17-1.44l0.14-1.23v-29.6v-4.82
+                  l4.19,2.42l33.71,19.46l1.4,0.81V246.51z M956.64,183.61v37.03v28.01c0,4.88,0.98,9.53,2.75,13.77c1.84,4.42,4.54,8.4,7.88,11.74
+                  h0.01c3.34,3.37,7.34,6.06,11.74,7.89c4.24,1.77,8.9,2.75,13.77,2.75c4.88,0,9.53-0.98,13.77-2.75c4.41-1.82,8.4-4.52,11.74-7.89
+                  h0.01c3.34-3.34,6.05-7.32,7.88-11.74c1.77-4.24,2.75-8.89,2.75-13.77v-20.07v-32.75v-3.69c0-9.46,1.9-18.49,5.33-26.75
+                  c3.56-8.58,8.79-16.32,15.25-22.77c6.46-6.46,14.18-11.69,22.77-15.25c8.26-3.43,17.29-5.33,26.75-5.33
+                  c9.46,0,18.5,1.9,26.75,5.33c8.58,3.56,16.32,8.79,22.78,15.25c6.45,6.45,11.68,14.18,15.24,22.77
+                  c3.44,8.26,5.33,17.29,5.33,26.75v51.66v6.62l-4.73-4.64c-2.8-2.74-5.76-5.31-8.86-7.67c-3.1-2.34-6.36-4.51-9.76-6.48
+                  l-9.17-5.31l-1.4-0.81v-1.59v-31.78c0-4.88-0.98-9.53-2.75-13.77c-1.84-4.42-4.55-8.4-7.89-11.76v0.01
+                  c-6.57-6.57-15.6-10.64-25.53-10.64c-4.87,0-9.52,0.98-13.77,2.75c-4.41,1.82-8.39,4.52-11.74,7.89l-0.01-0.01
+                  c-3.34,3.35-6.04,7.34-7.88,11.76c-1.77,4.24-2.75,8.89-2.75,13.77v20.07v32.75v3.69c0,9.46-1.9,18.5-5.33,26.75
+                  c-3.56,8.58-8.78,16.32-15.25,22.77c-6.45,6.47-14.18,11.69-22.77,15.24c-8.25,3.44-17.29,5.34-26.75,5.34
+                  c-9.46,0-18.5-1.9-26.75-5.34c-8.58-3.55-16.32-8.76-22.77-15.24c-6.47-6.45-11.69-14.18-15.25-22.77
+                  c-3.43-8.25-5.33-17.29-5.33-26.75v-81.4v-31.6v-0.01v-0.01v-0.03v-0.01v-0.03v-0.01v-0.03v-0.01v-0.01v-0.03v-0.01v-0.01v-0.95
+                  v-4.8l4.16,2.39l28.37,16.39l1.41,0.8v1.59V183.61z"/>
+              </g>
+            </g>
+          </g>
+
+          </g>
+        </svg>
+        
+      </motion.div>
+      <motion.div className={`bg-secondary flex items-center justify-center`}
+        variants={LoginVariants}
+        initial='hidden'
+        animate='visible'
+      >
+        {/* Login Form */}
+        <motion.div
+          dir={isRTL? 'rtl' : 'ltr'}
+           variants={formVariants}
+           initial='hidden'
+           animate='visible'
+           className="bg-white p-8 w-10/12 md:w-6/12 rounded-lg shadow-xl space-y-8 flex flex-col justify-around"
+        >
+          
+          <Typography variant='h4'> 
+            <FormattedMessage id='login.welcome'/>
+          </Typography>
+
+          <Formik
+            initialValues={initialValues}
+            validationSchema={ValidationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ errors, touched }) => ( // Add errors and touched here
+              <Form className="space-y-8 flex flex-col justify-center w-full">
+                <Field
+                  type="text"
+                  name="email"
+                  as={TextField}
+                  color="secondary"
+                  label={<FormattedMessage id="form.email" />}
+                  variant="outlined"
+                  fullWidth
+                  // value={Email}
+                  error={errors.email && touched.email}
+                  helperText={touched.email && errors.email} 
+                  // onChange={(e:any) => setEmail(e.target.value)}
+                />
+
+                <Field
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  as={TextField}
+                  color="secondary"
+                  label={<FormattedMessage id="form.password" />}
+                  variant="outlined"
+                  fullWidth
+                  // value={Password}
+                  error={errors.password && touched.password}
+                  helperText={touched.password && errors.password}
+                  // onChange={(e:any) => setPassword(e.target.value)}
+                >
+                  <InputLabel htmlFor="outlined-adornment-password">
+                      <FormattedMessage id="form.password" />
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    name="password"
+                    color='secondary'
+                    type={showPassword ? 'text' : 'password'}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                        >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </Field>
+                {errorMessage !== ''? <Typography className="text-red-500">{errorMessage}</Typography> : null}
+
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  className="bg-secondary hover:bg-primary"
+                >
+                  <Typography variant="button">
+                    <FormattedMessage id="login.login" />
+                  </Typography>
+                </Button>
+              </Form>
+            )}
+          </Formik>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+};
+
+export default SplashScreen;

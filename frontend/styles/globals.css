@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'poppins';
+  src: url('../public/fonts/Poppins.woff2');
+}
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('../public/fonts/Cairo.woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+  @font-face {
+    font-family: 'alfont';
+    src: url('../public/fonts/alfont.otf');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 19, 38, 61;
+  --background-end-rgb: 255, 255, 255;
+  --primary: rebeccapurple;
+  --secondary: cornflowerblue;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+}
+
+* {
+  scrollbar-width: none;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 0px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 3px solid var(--primary);
+}
+
+.Book { 
+  width: 100%; 
+  position: relative; 
+  /* background: rgb(58, 238, 58);  */
+  background-repeat: no-repeat;
+  background-size: cover;
+} 
+
+.Book::before,
+.Book::after {
+  content: ""; 
+  width: 50%; 
+  height: 100px; 
+  position: absolute; 
+  top: -50px; 
+  background: #13263d;
+}
+
+.Book::before {
+  left: 0; 
+  transform: skewY(3deg); 
+}
+
+.Book::after { 
+  right: 0; 
+  transform: skewY(-3deg); 
+}
+
+.Butterfly { 
+  width: 100%; 
+  /* height: 400px;  */
+  position: relative; 
+  background-image: inherit; /* Inherit the background image from .Book */
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* clip-path: polygon(100% 0, 100% 100%, 48% 81%, 0 100%, 0 0); */
+} 
+
+.Butterfly::before,
+.Butterfly::after {
+  content: ""; 
+  width: 50%; 
+  height: 50px; 
+  position: absolute; 
+  top: -30px; 
+  background: #13263d;
+}
+
+.Butterfly::before {
+  left: 0; 
+  transform: skewY(-3deg); 
+}
+
+.Butterfly::after { 
+  right: 0; 
+  transform: skewY(3deg); 
+}
+
+.Auto { 
+  width: 100%; 
+  /* height: 400px;  */
+  position: relative; 
+  background-repeat: no-repeat;
+  background-size: cover;
+} 
+.Auto::before,
+.Auto::after {
+  content: ""; 
+  width: 50%; 
+  height: 50px; 
+  position: absolute; 
+  top: -30px; 
+  background: white;
+}
+
+.Auto::before {
+  left: 0; 
+  transform: skewY(-3deg); 
+}
+
+.Auto::after { 
+  right: 0; 
+  transform: skewY(3deg); 
+}
+
+.Autos { 
+  width: 100%; 
+  /* height: 400px;  */
+  position: absolute; 
+  background-image: inherit; /* Inherit the background image from .Book */
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 3;
+} 
+/* .Autos::before,
+.Autos::after {
+  content: ""; 
+  width: 50%; 
+  height: 50px; 
+  position: absolute; 
+  top: -20px; 
+  background: white;
+  z-index: 30;
+}
+
+.Autos::before {
+  left: 0; 
+  transform: skewY(3deg); 
+}
+
+.Autos::after { 
+  right: 0; 
+  transform: skewY(-3deg); 
+} */
+
+.whiteUp { 
+  width: 100%; 
+  position: relative; 
+  /* background: rgb(58, 238, 58);  */
+  background-repeat: no-repeat;
+  background-size: cover;
+} 
+
+.whiteUp::before,
+.whiteUp::after {
+  content: ""; 
+  width: 50%; 
+  height: 100px; 
+  position: absolute; 
+  top: -55px; 
+  background: #fff;
+}
+
+.whiteUp::before {
+  left: 0; 
+  transform: skewY(3deg); 
+}
+
+.whiteUp::after { 
+  right: 0; 
+  transform: skewY(-3deg); 
+}
